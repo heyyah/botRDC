@@ -18,7 +18,17 @@ if(document.title.substring(0,  6) == "Rua de") {
   
 	  	if(x.substring(0,28) == "Já atacou este gangster hoje") {
 				console.log("Já atacou este gangster");
-    	  window.location.href = "http://www.google.com.br";
+    	  //window.location.href = "http://www.google.com.br";
+        
+        var temp = (x.substring(70, 72) * 1000) + (x.substring(67, 69) * 60000) + (x.substring(64, 66) * 3600000);
+        temp -= 1500;
+    	  console.log(temp);
+  	    window.setTimeout(function() {
+	        console.log("atacando...");
+        	var beat = document.getElementsByClassName("beat");
+    			window.location.href = beat[1]["href"];
+    	  }, temp);
+        
 			}
 			else if(x.indexOf("Você não pode atacar. O gangster está bastante espancado") != -1) {
 				console.log("alguem atacou");
@@ -46,3 +56,10 @@ if(document.title.substring(0,  6) == "Rua de") {
 	}
 }
 
+if(document.title.indexOf("Gangue") != -1) {
+  if(window.location.href.indexOf("list") != -1) {
+    var gangue = document.getElementsByClassName("gang")[2];
+    localStorage.setItem("gangue", gangue.textContent);
+  }
+  
+}
