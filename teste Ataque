@@ -1,0 +1,47 @@
+// ==UserScript==
+// @name     teste Ataque
+// @version  1
+// @grant    none
+// ==/UserScript==
+
+if(document.title.substring(0, 9) == "Constante") {
+  var lista = document.getElementsByClassName("default")[0].children[0].children;
+  var ataques = [];
+  var nivel = parseInt(document.getElementsByClassName("exp-level")[0].textContent);
+  var respeito = parseInt(document.getElementsByClassName("respect")[0].textContent.substring(0, document.getElementsByClassName("respect")[0].textContent.length - 3).replace( /\s/g, '' )) - 75;
+  for(var x = 1; x < lista.length; x++) {
+    var gangster = lista[x].cells;
+    if(gangster[4].textContent > nivel - 6) {
+      if(parseInt(gangster[2].textContent.substring(0, gangster[2].textContent.length - 4).replace( /\s/g, '' )) < respeito) {
+        if(localStorage.getItem("gangue") != gangster[3].textContent) {
+          ataques.push(gangster[1]);
+        }
+      }
+    }
+  }
+  console.log(ataques);
+  var x = ataques.length - 1;
+	var tid = window.setInterval(function() {
+    if(x >= 0) {
+      window.open(ataques[x].firstChild.href);
+      x--;
+    } else {
+      window.clearInterval(tid);
+    }
+	}, 2000);
+  
+  window.setTimeout(function() {
+    if(document.getElementsByClassName("prev").length != 0) {
+    	window.location.href = document.getElementsByClassName("prev")[0].href;
+    }
+  }, (ataques.length * 3000 + 2000))
+}
+
+
+if(document.title.indexOf("Gangue") != -1) {
+  if(window.location.href.indexOf("list") != -1) {
+    var gangue = document.getElementsByClassName("gang")[2];
+    localStorage.setItem("gangue", gangue.textContent);
+  }
+  
+}
