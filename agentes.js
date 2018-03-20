@@ -15,12 +15,8 @@ if(document.title.indexOf("Perfil") != -1) {
   now = new Date;
   console.log(now);
   if(x.length == 1) {
-    if(window.location.href.indexOf("agent") != -1) {
-      url = window.location.href.substring(0,window.location.href.indexOf('?')) + document.getElementsByClassName("mm-street")[0].search;
-    } else {
-      url = window.location.href + "/agent.attack" + document.getElementsByClassName("mm-street")[0].search;
-      window.location.href = url;
-    }
+    document.getElementsByClassName("agent")[0].click();
+    document.getElementsByClassName("st")[0].click();
     window.setTimeout(function() {
          console.log("teste");
       var b = document.getElementsByClassName("utt");
@@ -43,4 +39,11 @@ if(document.title.indexOf("Perfil") != -1) {
       
       }, 120000);
   }
+
+if(document.title.indexOf("Gangue") != -1) {
+  if(window.location.href.indexOf("list") != -1) {
+    var gangue = document.getElementsByClassName("gang")[2];
+    localStorage.setItem("gangue", gangue.textContent);
+  }
   
+}
