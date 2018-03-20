@@ -4,15 +4,26 @@
 // @grant    none
 // ==/UserScript==
 
-if(document.title.indexOf("Treino") != -1) {
-    if(document.getElementsByClassName("training_points")[0]["textContent"] != 0) {
-      document.getElementsByClassName("training_train")[1].click();
-    } else {
-      window.setTimeout(function() {
-        window.location.href = document.getElementsByClassName("intelect")[0].click();
-      }, 5000);
+if(window.location.href.indexOf("training") != -1) {
+  var tipo;
+  var treino = document.getElementsByClassName("training_points");
+  if(window.location.href.indexOf("school") != -1) {
+    for(var x = 0; x < treino.length; x++) {
+      if(treino[x].parentElement.title.indexOf("intelect") != -1) {
+        tipo = x;
+      }
     }
-  } else if(document.title.indexOf("Hotel") != -1) {
+  } else {
+    for(var x = 0; x < treino.length; x++) {
+      if(treino[x].parentElement.title.indexOf("strength") != -1) {
+        tipo = x;
+      }
+    }
+  }
+    if(document.getElementsByClassName("training_points")[tipo]["textContent"] != 0) {
+      document.getElementsByClassName("training_train")[1].click();
+    }
+  } else if(window.location.href.indexOf("bar") != -1) {
     var sexapeal = document.getElementsByClassName("smarttip");
     for(var x = 0; x < sexapeal.length; x++) {
       if(sexapeal[x].href != null) {
@@ -49,13 +60,13 @@ if(document.title.indexOf("Treino") != -1) {
             console.log("3");
             if(parseInt(itens[x].textContent.substring(0,2)) > 0) {
               window.location.href = itens[x].firstChild.href;
-            } else {
+            }/* else {
               window.setTimeout(function() {
                   window.location.href = sexapeal.href;
               }, 15000);
-            }
+            }*/
           }
         }   
       }
     }
-  }
+}
