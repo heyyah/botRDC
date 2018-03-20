@@ -90,3 +90,8 @@ if(y.innerText != "-") {
 }
   
 }
+if(document.title.indexOf("Gangue") != -1) {
+  if(window.location.href.indexOf("list") != -1) {
+    var gangue = document.getElementsByClassName("gang")[2];
+    localStorage.setItem("gangue", gangue.textContent);
+  }
